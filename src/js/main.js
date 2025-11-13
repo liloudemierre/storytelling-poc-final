@@ -106,18 +106,40 @@ video.addEventListener("ended", () => {
       end: "bottom+=200% top",
       pin: true,
       scrub: 5,
-      markers: true,
+      markers: false,
     },
   });
 
   tl4
-    .to(".issue-soleil", { x: "100%", y: "-190%", duration: "2" })
-    .to(".issue-text", { x: "-30%", y: "430%", duration: "1" }, "-=2")
+    .to(".issue-soleil", { x: "100%", y: "-190%", duration: "5" })
+    .to(".issue-text", { x: "-30%", y: "430%", duration: "1" }, "-=5")
     .to(".issue", {
       scale: 20, // zoom de la "caméra"
       x: "-380%", // ajuster pour centrer sur le soleil
       y: "780%",
       transformOrigin: "center center",
       duration: 5,
+    })
+    .to(".issue", {
+      opacity: "0",
     });
+});
+
+ScrollTrigger.refresh();
+// === Animation scroll horizontal ===
+const tlHorizontal = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".horizontal", // déclencheur
+    start: "bottom bottom",
+    end: "+=2000", // distance de scroll horizontale (à ajuster selon la longueur de l'image)
+    pin: true, // la section reste fixe
+    scrub: true, // animation fluide au scroll
+    markers: true, // mettre true pour tester
+  },
+});
+
+// Animation : défilement horizontal de l’image
+tlHorizontal.to(".horizontal-image", {
+  x: "-100%",
+  ease: "none",
 });
